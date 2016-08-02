@@ -36,5 +36,7 @@ public class ArnAdn {
         return result;
     }
     
-    
+    public static String toARN(){
+        return null;
+    }
 }
