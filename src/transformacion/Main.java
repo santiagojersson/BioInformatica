@@ -11,10 +11,10 @@ package transformacion;
  */
 public class Main {
     public static void main(String[] args) {
-        boolean r= ArnAdn.isADN("GCT");
-        System.out.println("is ADN "+r);
         
-        boolean re= ArnAdn.isARN("GCTu");
-        System.out.println("is ARN "+re);
+        
+        String ARN= ArnAdn.toARN("");
+        System.out.println("Arn: "+ARN+" , Adn "+ArnAdn.toADN(ARN));
+        
     }
 }
