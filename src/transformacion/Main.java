@@ -5,16 +5,25 @@
  */
 package transformacion;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+
 /**
  *
  * @author Santiago
  */
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException, IOException {
         
-        System.out.println(ArnAdn.isADN("a"));
-        String ARN= ArnAdn.toARN("gtaa");
-        System.out.println("Arn: "+ARN+" , Adn "+ArnAdn.toADN(ARN));
+        InputStream in = new FileInputStream(new File("src/transformacion/archivo.txt"));
+        RawADNReader r= new RawADNReader(in);
+        while (r.read()!=-1) {            
+            System.out.println((char)r.read());
+        }
+        
         
     }
 }
