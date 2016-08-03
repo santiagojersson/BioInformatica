@@ -24,7 +24,7 @@ public class ArnAdn {
     }
     
     public static boolean isValidARN(String ARNCandidate){
-        String arn="U";
+        String arn="ACGU";
         boolean result=false;
         for (int i = 0; i < ARNCandidate.length(); i++) {
             if (arn.contains(ARNCandidate.substring(i, (i+1)).toUpperCase())) {

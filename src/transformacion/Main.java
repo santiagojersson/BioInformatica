@@ -12,8 +12,8 @@ package transformacion;
 public class Main {
     public static void main(String[] args) {
         
-        
-        String ARN= ArnAdn.toARN("");
+        System.out.println(ArnAdn.isADN("a"));
+        String ARN= ArnAdn.toARN("gtaa");
         System.out.println("Arn: "+ARN+" , Adn "+ArnAdn.toADN(ARN));
         
     }
