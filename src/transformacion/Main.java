@@ -20,8 +20,13 @@ public class Main {
         
         InputStream in = new FileInputStream(new File("src/transformacion/archivo.txt"));
         RawADNReader r= new RawADNReader(in);
-        while (r.read()!=-1) {            
+        System.out.println("in "+r.available());
+        
+        int size= r.available();
+        int i=1;
+        while (i<=size) {
             System.out.println((char)r.read());
+            i++;
         }
         
         
