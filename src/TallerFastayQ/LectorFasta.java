@@ -22,13 +22,8 @@ public class LectorFasta extends BufferedReader {
     
     public String readLine() throws IOException{
         String ret= super.readLine();
-        String r="";
-        if (ret.startsWith(">")) {
-            r=ret.substring(1, (ret.length())); 
-            return r;
-        }else{
-            return ret;
-        }
+             
+        return ret;
         
     }
     
