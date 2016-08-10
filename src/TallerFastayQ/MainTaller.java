@@ -17,8 +17,10 @@ import java.io.Reader;
 public class MainTaller {
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        leerFasta("src/tallerFastayQ/archivoFasta.txt");
-        leerFastaQ("src/tallerFastayQ/archivoFastaQ.txt");
+       // leerFasta("src/tallerFastayQ/archivoFasta.txt");
+       // leerFastaQ("src/tallerFastayQ/archivoFastaQ.txt");
+       
+       cadenaInversaFastaQ("src/tallerFastayQ/archivoFastaQ.txt");
     }
 
     private static void leerFasta(String ruta) throws FileNotFoundException, IOException {
@@ -97,6 +99,44 @@ public class MainTaller {
         }
         return result;
 
+    }
+
+    private static void cadenaInversaFastaQ(String ruta) throws IOException {
+        try {
+            Reader r = new FileReader(ruta);
+            LectorFastaQ lector = new LectorFastaQ(r);
+
+            String linea;
+            String seqName = "";
+            String seq = "";
+            String segQ = "";
+            boolean signoMas = false;
+            while ((linea = lector.readLine()) != null) {
+
+                if (linea.startsWith("@") && seqName.equalsIgnoreCase("")) {
+                    seqName = linea.substring(1, (linea.length()));
+                } else if (!(linea.equalsIgnoreCase("+")) && signoMas == false) {
+                    seq = seq + linea;
+                } else if (linea.equalsIgnoreCase("+")) {
+                    signoMas = true;
+                } else if (signoMas && !(linea.isEmpty())) {
+                    segQ = segQ + linea;
+                } else {
+                    throw new IOException("Archivo Invalido");
+                }
+            }
+            
+            char[] c=InvertAdn.invert(seq.toCharArray());
+            System.out.println(String.valueOf(c));
+            
+            
+            
+            
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 }
