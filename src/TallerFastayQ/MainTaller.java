@@ -17,10 +17,10 @@ import java.io.Reader;
 public class MainTaller {
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
-       // leerFasta("src/tallerFastayQ/archivoFasta.txt");
-       // leerFastaQ("src/tallerFastayQ/archivoFastaQ.txt");
-       
-       cadenaInversaFastaQ("src/tallerFastayQ/archivoFastaQ.txt");
+        // leerFasta("src/tallerFastayQ/archivoFasta.txt");
+        leerFastaQ("src/tallerFastayQ/archivoFastaQ.txt");
+
+        //cadenaInversaFastaQ("src/tallerFastayQ/archivoFastaQ.txt");
     }
 
     private static void leerFasta(String ruta) throws FileNotFoundException, IOException {
@@ -31,12 +31,12 @@ public class MainTaller {
         String name = "";
         String seq = "";
         boolean firstLine = false;
-        
+
         while ((linea = lector.readLine()) != null) {
             if (linea.startsWith(">")) {
                 name = linea.substring(1, (linea.length()));
             } else {
-                seq=seq+linea;
+                seq = seq + linea;
             }
         }
         System.out.println(name);
@@ -53,6 +53,7 @@ public class MainTaller {
             String seqName = "";
             String seq = "";
             String segQ = "";
+            String seqNo = "";
             boolean signoMas = false;
             while ((linea = lector.readLine()) != null) {
 
@@ -62,22 +63,25 @@ public class MainTaller {
                     seq = seq + linea;
                 } else if (linea.equalsIgnoreCase("+")) {
                     signoMas = true;
-                } else if (signoMas && !(linea.isEmpty())) {
+                } else if (signoMas) {
                     segQ = segQ + linea;
-                } else {
-                    throw new IOException("Archivo Invalido");
+                    if ((seq.length() == (segQ.length()))) {
+                        seqNo = devolverCalidad(segQ);
+                        System.out.println(seqName);
+                        System.out.println(seq);
+                        System.out.println(seqNo);
+                        seqName="";
+                        seq="";
+                        signoMas=false;
+                        segQ="";
+                    } else {
+                        System.out.println("Las secuencias no tienen el mismo tamaño");
+
+                    }
                 }
             }
-            String seqNo = "";
-            if ((seq.length() == (segQ.length()))) {
-                seqNo = devolverCalidad(segQ);
-                System.out.println(seqName);
-                System.out.println(seq);
-                System.out.println(seqNo);
-            } else {
-                System.out.println("Las secuencias no tienen el mismo tamaño");
 
-            }
+            
         } catch (NullPointerException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
@@ -125,13 +129,10 @@ public class MainTaller {
                     throw new IOException("Archivo Invalido");
                 }
             }
-            
-            char[] c=InvertAdn.invert(seq.toCharArray());
+
+            char[] c = InvertAdn.invert(seq.toCharArray());
             System.out.println(String.valueOf(c));
-            
-            
-            
-            
+
         } catch (NullPointerException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {

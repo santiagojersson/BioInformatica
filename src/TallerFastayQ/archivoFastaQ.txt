@@ -1,8 +1,8 @@
 @Ebola
-T
-G
-AT
+TGAT
 +
-@
-!
-#2
+@!#2
+@Ebola 2
+TGAT
++
+@!$2
