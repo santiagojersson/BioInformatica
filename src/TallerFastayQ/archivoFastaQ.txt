@@ -1,8 +1,8 @@
 @Ebola
-TGAT
+TCAT
 +
 @!#2
 @Ebola 2
-TGAT
+AGAT
 +
 @!$2

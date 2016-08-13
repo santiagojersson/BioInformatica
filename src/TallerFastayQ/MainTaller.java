@@ -18,9 +18,9 @@ public class MainTaller {
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
         // leerFasta("src/tallerFastayQ/archivoFasta.txt");
-        leerFastaQ("src/tallerFastayQ/archivoFastaQ.txt");
+        //leerFastaQ("C:/Users/JerssonSantiago/Downloads/OneDrive-2016-08-13/test.fq");
 
-        //cadenaInversaFastaQ("src/tallerFastayQ/archivoFastaQ.txt");
+        cadenaInversaFastaQ("C:/Users/JerssonSantiago/Downloads/OneDrive-2016-08-13/test.fq");
     }
 
     private static void leerFasta(String ruta) throws FileNotFoundException, IOException {
@@ -70,10 +70,10 @@ public class MainTaller {
                         System.out.println(seqName);
                         System.out.println(seq);
                         System.out.println(seqNo);
-                        seqName="";
-                        seq="";
-                        signoMas=false;
-                        segQ="";
+                        seqName = "";
+                        seq = "";
+                        signoMas = false;
+                        segQ = "";
                     } else {
                         System.out.println("Las secuencias no tienen el mismo tamaño");
 
@@ -81,7 +81,6 @@ public class MainTaller {
                 }
             }
 
-            
         } catch (NullPointerException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
@@ -114,6 +113,7 @@ public class MainTaller {
             String seqName = "";
             String seq = "";
             String segQ = "";
+            char[] c;
             boolean signoMas = false;
             while ((linea = lector.readLine()) != null) {
 
@@ -123,15 +123,24 @@ public class MainTaller {
                     seq = seq + linea;
                 } else if (linea.equalsIgnoreCase("+")) {
                     signoMas = true;
-                } else if (signoMas && !(linea.isEmpty())) {
+                    //System.out.println("seq " + seq);
+                    c = InvertAdn.invert(seq.toCharArray());
+                    System.out.println(String.valueOf(c));   // Secuencia Invertida
+                } else if (signoMas) {
                     segQ = segQ + linea;
-                } else {
-                    throw new IOException("Archivo Invalido");
+                    if ((seq.length() == (segQ.length()))) {
+                        
+                        seqName = "";
+                        seq = "";
+                        signoMas = false;
+                        segQ = "";
+                    } else {
+                        System.out.println("Las secuencias no tienen el mismo tamaño");
+                    }
                 }
             }
-
-            char[] c = InvertAdn.invert(seq.toCharArray());
-            System.out.println(String.valueOf(c));
+            lector.close();
+            
 
         } catch (NullPointerException e) {
             e.printStackTrace();
