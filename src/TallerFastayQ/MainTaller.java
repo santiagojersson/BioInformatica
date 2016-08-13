@@ -17,10 +17,11 @@ import java.io.Reader;
 public class MainTaller {
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        // leerFasta("src/tallerFastayQ/archivoFasta.txt");
-        //leerFastaQ("C:/Users/JerssonSantiago/Downloads/OneDrive-2016-08-13/test.fq");
+        // leerFasta("C:/Users/JerssonSantiago/Downloads/OneDrive-2016-08-13/worm.fasta");
+        //leerFastaQ("C:/Users/JerssonSantiago/Downloads/OneDrive-2016-08-13/multiple Tests.fq");
 
-        cadenaInversaFastaQ("C:/Users/JerssonSantiago/Downloads/OneDrive-2016-08-13/test.fq");
+        //cadenaInversaFastaQ("C:/Users/JerssonSantiago/Downloads/OneDrive-2016-08-13/multiple Tests.fq);
+         cadenaInversaFasta("C:/Users/JerssonSantiago/Downloads/OneDrive-2016-08-13/worm.fasta"); 
     }
 
     private static void leerFasta(String ruta) throws FileNotFoundException, IOException {
@@ -30,17 +31,18 @@ public class MainTaller {
         String linea;
         String name = "";
         String seq = "";
-        boolean firstLine = false;
+        //boolean firstLine = false;
 
         while ((linea = lector.readLine()) != null) {
             if (linea.startsWith(">")) {
                 name = linea.substring(1, (linea.length()));
+                //System.out.println(name);
             } else {
-                seq = seq + linea;
+                //seq = seq + linea;
+                System.out.println(linea);
             }
         }
-        System.out.println(name);
-        System.out.println(seq);
+        //System.out.println(seq);
     }
 
     private static void leerFastaQ(String ruta) throws FileNotFoundException, IOException {
@@ -149,4 +151,28 @@ public class MainTaller {
         }
     }
 
+    private static void cadenaInversaFasta(String ruta) throws IOException{
+     Reader r = new FileReader(ruta);
+        LectorFasta lector = new LectorFasta(r);
+
+        String linea;
+        String name = "";
+        String seq = "";
+        //boolean firstLine = false;
+        char[] c;
+        while ((linea = lector.readLine()) != null) {
+            if (linea.startsWith(">")) {
+                name = linea.substring(1, (linea.length()));
+                System.out.println(name);
+            } else {
+                //seq = seq + linea;
+                c = InvertAdn.invert(linea.toCharArray());
+                    System.out.println(String.valueOf(c));
+            }
+        }
+        //System.out.println(seq);
+    
+    
+    }
+    
 }

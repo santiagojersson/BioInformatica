@@ -13,13 +13,13 @@ public class InvertAdn {
     
     public static char invertir(char c){
         char ret = 0;
-        if (c=='T' || c=='U') {
+        if (c=='T' || c=='U' || c=='t' || c=='u') {
             ret= 'A';
-        }else if(c=='A'){
+        }else if(c=='A' || c=='a'){
             ret= 'T';
-        }else if(c=='C'){
+        }else if(c=='C' || c=='c'){
             ret= 'G';
-        }else if(c=='G'){
+        }else if(c=='G' || c=='g'){
             ret= 'C';
         }
          return ret;   
