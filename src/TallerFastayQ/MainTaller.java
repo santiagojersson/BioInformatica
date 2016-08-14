@@ -20,8 +20,8 @@ public class MainTaller {
         // leerFasta("C:/Users/JerssonSantiago/Downloads/OneDrive-2016-08-13/worm.fasta");
         //leerFastaQ("C:/Users/JerssonSantiago/Downloads/OneDrive-2016-08-13/multiple Tests.fq");
 
-        leerArchivoFastaQ("C:/Users/JerssonSantiago/Downloads/OneDrive-2016-08-13/sra_data.fastq"); //modificacion Archivo 1 Gb
-        invertirFastaQ("C:/Users/JerssonSantiago/Downloads/OneDrive-2016-08-13/sra_data.fastq");//invertir ADN/ARN Archivo 1 Gb
+        //leerArchivoFastaQ("C:/Users/JerssonSantiago/Downloads/OneDrive-2016-08-13/sra_data.fastq"); //modificacion Archivo 1 Gb
+        //invertirFastaQ("C:/Users/JerssonSantiago/Downloads/OneDrive-2016-08-13/sra_data.fastq");//invertir ADN/ARN Archivo 1 Gb
         
         //cadenaInversaFastaQ("C:/Users/JerssonSantiago/Downloads/OneDrive-2016-08-13/multiple Tests.fq);
         //cadenaInversaFasta("C:/Users/JerssonSantiago/Downloads/OneDrive-2016-08-13/worm.fasta");
