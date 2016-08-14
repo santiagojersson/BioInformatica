@@ -21,7 +21,7 @@ public class MainTaller {
         //leerFastaQ("C:/Users/JerssonSantiago/Downloads/OneDrive-2016-08-13/multiple Tests.fq");
 
         leerArchivoFastaQ("C:/Users/JerssonSantiago/Downloads/OneDrive-2016-08-13/sra_data.fastq"); //modificacion Archivo 1 Gb
-        invertirFastaQ("C:/Users/JerssonSantiago/Downloads/OneDrive-2016-08-13/sra_data.fastq");
+        invertirFastaQ("C:/Users/JerssonSantiago/Downloads/OneDrive-2016-08-13/sra_data.fastq");//invertir ADN/ARN Archivo 1 Gb
         
         //cadenaInversaFastaQ("C:/Users/JerssonSantiago/Downloads/OneDrive-2016-08-13/multiple Tests.fq);
         //cadenaInversaFasta("C:/Users/JerssonSantiago/Downloads/OneDrive-2016-08-13/worm.fasta");
@@ -47,6 +47,7 @@ public class MainTaller {
             }
         }
         //System.out.println(seq);
+        lector.close();
     }
 
     private static void leerFastaQ(String ruta) throws FileNotFoundException, IOException {
@@ -86,7 +87,7 @@ public class MainTaller {
                     }
                 }
             }
-
+            lector.close();
         } catch (NullPointerException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
@@ -99,8 +100,8 @@ public class MainTaller {
         String result = "";
 
         for (int i = 0; i < segQ.length(); i++) {
-            if (i == (segQ.length() - 1)) {
-                result = result + segQ.codePointAt(i);
+            if (i == (segQ.length() - 1)) {         // para q no ponga una coma al final de la cadena.
+                result = result + segQ.codePointAt(i);   
             } else {
                 result = result + segQ.codePointAt(i) + ",";
             }
@@ -174,7 +175,7 @@ public class MainTaller {
             }
         }
         //System.out.println(seq);
-
+        lector.close();
     }
 
     private static void leerArchivoFastaQ(String ruta) throws FileNotFoundException, IOException {
@@ -212,7 +213,7 @@ public class MainTaller {
                     }
                 }
             }
-
+            lector.close();
         } catch (NullPointerException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
@@ -257,7 +258,7 @@ public class MainTaller {
                     }
                 }
             }
-
+            lector.close();
         } catch (NullPointerException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
