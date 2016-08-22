@@ -1,4 +1,4 @@
 >Virus
-ATR
-CGTA
-SA
+ATRCGTASA
+>Virus 2
+ATRCGTASA

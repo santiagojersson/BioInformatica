@@ -17,13 +17,16 @@ import java.io.Reader;
 public class MainTaller {
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        // leerFasta("F:/archivos/worm.fasta");
-        leerFastaQ("F:/archivos/multiple Tests.fq");
+        System.out.println("-------FASTA ------");
+        leerFasta("src/TallerFastayQ/archivoFasta.txt");
+            
+        System.out.println("-------FASTA Q------");
+        leerFastaQ("E:/test.fq");
 
         //leerArchivoFastaQ("F:/archivos/sra_data.fastq"); //modificacion Archivo 1 Gb
         //invertirFastaQ("F:/archivos/sra_data.fastq");//invertir ADN/ARN Archivo 1 Gb
         
-        cadenaInversaFastaQ("F:/archivos/multiple Tests.fq");
+        // cadenaInversaFastaQ("F:/archivos/multiple Tests.fq");
         //cadenaInversaFasta("F:/archivos/worm.fasta");
         
     }
@@ -40,7 +43,7 @@ public class MainTaller {
         while ((linea = lector.readLine()) != null) {
             if (linea.startsWith(">")) {
                 name = linea.substring(1, (linea.length()));
-                //System.out.println(name);
+                System.out.println(name);
             } else {
                 //seq = seq + linea;
                 System.out.println(linea);
