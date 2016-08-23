@@ -14,7 +14,7 @@ import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static rosalindProblems.DNA.s;
+
 
 /**
  *
@@ -23,7 +23,7 @@ import static rosalindProblems.DNA.s;
 public class GC {
     
     private String id="";
-    private double content=0.0; 
+    private float content=0; 
     
     public void logic() throws FileNotFoundException, IOException {
 
@@ -69,11 +69,11 @@ public class GC {
     }
 
     private void evaluar(String nombre, int conta, int size) {
-        double r;
+        float r;
         
         //System.out.println(nombre+" "+conta+" "+size);
         if (!nombre.equalsIgnoreCase("")&& conta!=0) {
-            r=((double)conta/(double)size)*100;
+            r=((float)conta/(float)size)*100;
                            
             if (r>= this.content) {
                 this.content=r;
