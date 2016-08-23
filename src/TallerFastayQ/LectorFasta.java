@@ -33,16 +33,15 @@ public class LectorFasta extends BufferedReader {
         super.close();
     }
     
-    public void leerFasta(String ruta) throws FileNotFoundException, IOException {
-        Reader r = new FileReader(ruta);
-        LectorFasta lector = new LectorFasta(r);
+    public void leerFasta() throws FileNotFoundException, IOException {
+        
 
         String linea;
         String name = "";
         String seq = "";
         //boolean firstLine = false;
 
-        while ((linea = lector.readLine()) != null) {
+        while ((linea = readLine()) != null) {
             if (linea.startsWith(">")) {
                 name = linea.substring(1, (linea.length()));
                 System.out.println(name);
@@ -52,6 +51,29 @@ public class LectorFasta extends BufferedReader {
             }
         }
         //System.out.println(seq);
-        lector.close();
+        close();
     }
+    
+    public void cadenaInversaFasta() throws IOException {
+        
+        String linea;
+        String name = "";
+        String seq = "";
+        //boolean firstLine = false;
+        char[] c;
+        while ((linea = readLine()) != null) {
+            if (linea.startsWith(">")) {
+                name = linea.substring(1, (linea.length()));
+                System.out.println(name);
+            } else {
+                //seq = seq + linea;
+                c = InvertAdn.invert(linea.toCharArray());
+                System.out.println(String.valueOf(c));
+            }
+        }
+        //System.out.println(seq);
+        close();
+    }
+    
+    
 }
