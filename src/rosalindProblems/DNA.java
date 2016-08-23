@@ -11,9 +11,9 @@ import java.io.InputStream;
 public class DNA {
     public static int[] s= new int[4];
     
-    public static void main(String[] args) throws FileNotFoundException, IOException {
+    public static void logic() throws FileNotFoundException, IOException {
         
-        InputStream in = new FileInputStream(new File("src/rosalindProblems/rosalind_dna (2).txt"));
+        InputStream in = new FileInputStream(new File("src/rosalindProblems/entradas/dna.txt"));
         RawADNReader r= new RawADNReader(in);
         
         

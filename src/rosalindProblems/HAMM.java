@@ -8,8 +8,8 @@ import java.io.IOException;
 
 
 public class HAMM {
-    public static void main(String[] args) throws FileNotFoundException, IOException {
-        BufferedReader br = new BufferedReader(new FileReader("src/rosalindProblems/in.txt"));
+    public static void logic() throws FileNotFoundException, IOException {
+        BufferedReader br = new BufferedReader(new FileReader("src/rosalindProblems/entradas/hamm.txt"));
         
         String s=br.readLine();
         String t=br.readLine();

@@ -19,9 +19,9 @@ import java.io.InputStream;
  */
 public class Revc {
     
-     public static void main(String[] args) throws FileNotFoundException, IOException {
+     public static void logic() throws FileNotFoundException, IOException {
         
-         BufferedReader in = new BufferedReader(new FileReader("src/rosalindProblems/in.txt"));
+         BufferedReader in = new BufferedReader(new FileReader("src/rosalindProblems/entradas/revc.txt"));
         String linea;
         char[] re = null;
          while ((linea=in.readLine())!=null) {

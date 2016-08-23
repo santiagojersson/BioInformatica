@@ -11,8 +11,8 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class SUBS {
-    public static void main(String[] args) throws FileNotFoundException, IOException {
-        BufferedReader br = new BufferedReader(new FileReader("src/rosalindProblems/in.txt"));
+    public static void logic() throws FileNotFoundException, IOException {
+        BufferedReader br = new BufferedReader(new FileReader("src/rosalindProblems/entradas/subs.txt"));
         
         String s=br.readLine();
         String t=br.readLine();
@@ -24,7 +24,7 @@ public class SUBS {
         int j=v;
         while(j<s.length()) {
             String sub= s.substring(k, j);
-            System.out.println(sub);
+            //System.out.println(sub);
             if (sub.equalsIgnoreCase(t)) 
                 result=result+" "+(k+1);
             

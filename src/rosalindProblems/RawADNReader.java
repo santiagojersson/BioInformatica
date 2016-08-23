@@ -21,8 +21,8 @@ public class RawADNReader extends FilterInputStream{
     
     public int read() throws IOException{
         char c= (char) super.read();
-        if (c!='A' && c!='G' && c!='C' && c!='T') 
-            System.out.println("invalido");
+        /*if (c!='A' && c!='G' && c!='C' && c!='T' ) 
+            System.out.println("invalido");*/
         return ((int)c);
     }
     

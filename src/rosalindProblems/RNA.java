@@ -18,9 +18,9 @@ import static rosalindProblems.DNA.s;
  */
 public class RNA {
      
-    public static void main(String[] args) throws FileNotFoundException, IOException {
+    public static void logic() throws FileNotFoundException, IOException {
         
-        InputStream in = new FileInputStream(new File("src/rosalindProblems/in.txt"));
+        InputStream in = new FileInputStream(new File("src/rosalindProblems/entradas/rna.txt"));
         RawADNReader r= new RawADNReader(in);
        
         int i= r.available();
