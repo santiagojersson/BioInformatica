@@ -26,9 +26,12 @@ public class Main {
             //Revc.logic();
             ///HAMM.logic();
             //SUBS.logic();
-            GC gc= new GC(); gc.logic();
+            //GC gc= new GC(); gc.logic();
             //PROT pr = new PROT(); pr.logicTable();
-
+            //FIB.logic();
+            //PERM.logic(5);
+            CONS.logic();
+            //FIBD.logic();
             /*TFin = System.currentTimeMillis(); 
              tiempo = TFin - TInicio;
              System.out.println("Tiempo de ejecución en milisegundos: " + tiempo);*/

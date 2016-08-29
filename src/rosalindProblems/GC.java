@@ -30,7 +30,8 @@ public class GC {
         InputStream in = new FileInputStream(new File("src/rosalindProblems/entradas/gc.txt"));
         RawADNReader r= new RawADNReader(in);
         
-        int i= r.available(), conta=0,size=0;
+        int i= r.available();
+        float conta=0,size=0;
         int letra;
         String nombre="";
         boolean paso=false;
@@ -68,12 +69,12 @@ public class GC {
         
     }
 
-    private void evaluar(String nombre, int conta, int size) {
+    private void evaluar(String nombre, float conta, float size) {
         float r;
         
         //System.out.println(nombre+" "+conta+" "+size);
         if (!nombre.equalsIgnoreCase("")&& conta!=0) {
-            r=((float)conta/(float)size)*100;
+            r=(conta/size)*100;
                            
             if (r>= this.content) {
                 this.content=r;
