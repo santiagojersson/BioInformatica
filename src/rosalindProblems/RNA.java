@@ -10,32 +10,37 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import static rosalindProblems.DNA.s;
+import rosalindProblems.Reader.DNAReader;
+import rosalindProblems.Reader.RawDNAReader;
+
 
 /**
  *
  * @author Labing
  */
-public class RNA {
+public class RNA extends GenericProblem{
      
-    public static void logic() throws FileNotFoundException, IOException {
-        
-        InputStream in = new FileInputStream(new File("src/rosalindProblems/entradas/rna.txt"));
-        RawADNReader r= new RawADNReader(in);
-       
-        int i= r.available();
+    
+
+    @Override
+    public DNAReader getReader(InputStream in) {
+        DNAReader reader = new RawDNAReader();
+        reader.Init(in);
+        return reader;
+    }
+
+    @Override
+    public String Solve(DNAReader Origin) {
         char letra;
         String a="";
-        while (i>=1) {
-            letra=(char)r.read();
+        while (Origin.CanRead()) {
+            letra=(char)Origin.ReadChar();
             if(letra=='T'){
                 a=a+"U";
             }else {
                 a=a+letra;
-            }    
-            i--;
+            }  
         }
-        System.out.println(a);
-        
+        return a;
     }
 }

@@ -9,16 +9,29 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.LinkedList;
+import java.util.List;
+import rosalindProblems.Reader.DNAReader;
+import rosalindProblems.Reader.RawDNAReader;
 
-public class SUBS {
-    public static void logic() throws FileNotFoundException, IOException {
-        BufferedReader br = new BufferedReader(new FileReader("src/rosalindProblems/entradas/subs.txt"));
+public class SUBS extends GenericProblem{
+    
+
+    @Override
+    public DNAReader getReader(InputStream in) {
+        DNAReader reader = new RawDNAReader();
+        reader.Init(in);
+        return reader;
+    }
+
+    @Override
+    public String Solve(DNAReader Origin) {
+        List<String> ls=Origin.ReadAllLines();
+        String s=ls.get(0);
+        String t=ls.get(1);
         
-        String s=br.readLine();
-        String t=br.readLine();
-        br.close();
         String result="";
-        
         int k=0;
         int v=t.length();
         int j=v;
@@ -32,6 +45,6 @@ public class SUBS {
             j=k+v;
             
         }
-        System.out.println(result);
+        return (result);
     }
 }

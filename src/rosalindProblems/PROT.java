@@ -15,64 +15,41 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import rosalindProblems.Reader.DNAReader;
+import rosalindProblems.Reader.RawDNAReader;
 
 
 /**
  *
  * @author Santiago
  */
-public class PROT {
+public class PROT extends GenericProblem{
     
     private HashMap<String,String> hm= new HashMap<>();
-    private Hashtable<String,String> ht= new Hashtable<>();
-    
-    private void llenarMap() throws FileNotFoundException, IOException{
-        BufferedReader bf= new BufferedReader(new FileReader("src/rosalindProblems/entradas/RNAcondonTable.txt"));
-        
-        
-        String linea;
-        while ((linea=bf.readLine())!=null) {
-            StringTokenizer tk= new StringTokenizer(linea," ");
-            while (tk.hasMoreTokens()) {                
-                String key= (tk.nextToken());
-                String value= (tk.nextToken());
-                this.hm.put(key, value);
-            }
-            
-        }
-        bf.close();
+   
+    @Override
+    public DNAReader getReader(InputStream in) {
+        DNAReader reader = new RawDNAReader();
+        reader.Init(in);
+        return reader;
     }
-    
-    private void llenarTabla() throws FileNotFoundException, IOException{
-        BufferedReader bf= new BufferedReader(new FileReader("src/rosalindProblems/entradas/RNAcondonTable.txt"));
-        
-        
-        String linea;
-        while ((linea=bf.readLine())!=null) {
-            StringTokenizer tk= new StringTokenizer(linea," ");
-            while (tk.hasMoreTokens()) {                
-                String key= (tk.nextToken());
-                String value= (tk.nextToken());
-                this.ht.put(key, value);
-            }
-            
+
+    @Override
+    public String Solve(DNAReader Origin) {
+        try {
+            llenarMap();
+        } catch (IOException ex) {
+            Logger.getLogger(PROT.class.getName()).log(Level.SEVERE, null, ex);
         }
-        bf.close();
-    }
-    
-    public void logicMap() throws FileNotFoundException, IOException{
-        llenarMap();
-        
-        InputStream in = new FileInputStream(new File("src/rosalindProblems/entradas/prot.txt"));
-        RawADNReader r= new RawADNReader(in);
-        
-        int i= r.available(), conta=0;
+        int conta=0;
         int letra;
         String key="";
         String result="";
         boolean paso=false;
-        while (i>=1) {
-            letra=r.read();
+        while (Origin.CanRead()) {
+            letra=Origin.ReadChar();
             if (conta==3) {
                 result=result+this.hm.get(key);
                 key="";
@@ -81,37 +58,25 @@ public class PROT {
             }else{
                 key=key+(char)letra;
             }
-            i--;
+            
             conta++;
         }
-        System.out.println(result);
+        return result;
     }
     
-    public void logicTable() throws FileNotFoundException, IOException{
-        llenarTabla();
+    private void llenarMap() throws FileNotFoundException, IOException{
+        BufferedReader bf= new BufferedReader(new FileReader("src/rosalindProblems/entradas/RNAcondonTable.txt"));
         
-        InputStream in = new FileInputStream(new File("src/rosalindProblems/entradas/prot.txt"));
-        RawADNReader r= new RawADNReader(in);
-        
-        int i= r.available(), conta=0;
-        int letra;
-        String key="";
-        String result="";
-        boolean paso=false;
-        while (i>=1) {
-            letra=r.read();
-            if (conta==3) {
-                result=result+this.ht.get(key);
-                key="";
-                key=key+(char)letra;
-                conta=0;
-            }else{
-                key=key+(char)letra;
-            }
-            i--;
-            conta++;
+        String linea;
+        while ((linea=bf.readLine())!=null) {
+            StringTokenizer tk= new StringTokenizer(linea," ");
+            while (tk.hasMoreTokens()) {                
+                String key= (tk.nextToken());
+                String value= (tk.nextToken());
+                this.hm.put(key, value);
+            }  
         }
-        System.out.println(result);
+        bf.close();
     }
     
     

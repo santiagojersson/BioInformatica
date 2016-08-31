@@ -62,7 +62,7 @@ public class LectorFastaQ extends BufferedReader{
                     }
                 }
             }
-            close();
+            
         } catch (NullPointerException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
@@ -118,7 +118,7 @@ public class LectorFastaQ extends BufferedReader{
                     }
                 }
             }
-            close();
+            
 
         } catch (NullPointerException e) {
             e.printStackTrace();
@@ -201,7 +201,7 @@ public class LectorFastaQ extends BufferedReader{
                     }
                 }
             }
-            close();
+            
         } catch (NullPointerException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {

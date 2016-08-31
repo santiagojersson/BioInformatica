@@ -12,29 +12,35 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import rosalindProblems.Reader.DNAReader;
+import rosalindProblems.Reader.RawDNAReader;
 
 /**
  *
  * @author Labing
  */
-public class Revc {
+public class Revc extends GenericProblem{
     
-     public static void logic() throws FileNotFoundException, IOException {
-        
-         BufferedReader in = new BufferedReader(new FileReader("src/rosalindProblems/entradas/revc.txt"));
+    @Override
+    public DNAReader getReader(InputStream in) {
+        DNAReader reader = new RawDNAReader();
+        reader.Init(in);
+        return reader;
+    }
+
+    @Override
+    public String Solve(DNAReader Origin) {
         String linea;
         char[] re = null;
-         while ((linea=in.readLine())!=null) {
+         while (Origin.CanRead()) {
+             linea=Origin.ReadLine();
              re=invert(linea.toCharArray());
-             
-             
+            
          }
-         System.out.println(String.valueOf(re));
-       
-        
+        return (String.valueOf(re));
     }
      
-      public static char invertir(char c){
+    public static char invertir(char c){
         char ret = 0;
         if (c=='T' || c=='U' || c=='t' || c=='u') {
             ret= 'A';
@@ -59,6 +65,8 @@ public class Revc {
         return r;
     
     }
+
+    
     
      
 }

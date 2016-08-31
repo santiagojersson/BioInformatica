@@ -64,7 +64,7 @@ public class GC {
            
         }
         System.out.println(this.id+"\n"+this.content);
-        
+        */
         
         
     }
@@ -74,8 +74,7 @@ public class GC {
         
         //System.out.println(nombre+" "+conta+" "+size);
         if (!nombre.equalsIgnoreCase("")&& conta!=0) {
-            r=(conta/size)*100;
-                           
+            r=(conta/size)*100;      
             if (r>= this.content) {
                 this.content=r;
                 this.id=nombre;

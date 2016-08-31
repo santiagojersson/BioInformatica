@@ -5,10 +5,13 @@
  */
 package rosalindProblems;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import rosalindProblems.Writer.Writer;
 
 /**
  *
@@ -16,27 +19,28 @@ import java.util.logging.Logger;
  */
 public class Main {
 
-    public static void main(String[] args) {
-        try {
-            /*long TInicio, TFin, tiempo; //Variables para determinar el tiempo de ejecución
-             TInicio = System.currentTimeMillis();*/
-
-            //DNA.logic();
-            //RNA.logic();
-            //Revc.logic();
-            ///HAMM.logic();
-            //SUBS.logic();
-            //GC gc= new GC(); gc.logic();
-            //PROT pr = new PROT(); pr.logicTable();
-            //FIB.logic();
-            //PERM.logic(5);
-            CONS.logic();
-            //FIBD.logic();
-            /*TFin = System.currentTimeMillis(); 
-             tiempo = TFin - TInicio;
-             System.out.println("Tiempo de ejecución en milisegundos: " + tiempo);*/
-        } catch (IOException ex) {
-            ex.printStackTrace();
+   
+        public static void main(String[] args) throws FileNotFoundException {
+        GenericProblem problemita = null;
+        int i = 5;
+        InputStream stream = null;
+        switch(i){
+            case 0: problemita = new DNA();
+            stream = new FileInputStream("src/rosalindProblems/entradas/dna.txt");break;
+            case 1: problemita = new RNA();
+            stream = new FileInputStream("src/rosalindProblems/entradas/rna.txt");break;
+            case 2: problemita = new Revc();
+            stream = new FileInputStream("src/rosalindProblems/entradas/revc.txt");break;
+            case 3: problemita = new PROT();
+            stream = new FileInputStream("src/rosalindProblems/entradas/prot.txt");break;
+            case 4: problemita = new SUBS();
+            stream = new FileInputStream("src/rosalindProblems/entradas/subs.txt");break;
+            case 5: problemita = new HAMM();
+            stream = new FileInputStream("src/rosalindProblems/entradas/hamm.txt");break;
         }
+        String result = problemita.Solve(problemita.getReader(stream));
+        Writer.consoleWriter(result);
+        
     }
+    
 }

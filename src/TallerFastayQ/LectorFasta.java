@@ -51,7 +51,7 @@ public class LectorFasta extends BufferedReader {
             }
         }
         //System.out.println(seq);
-        close();
+        
     }
     
     public void cadenaInversaFasta() throws IOException {

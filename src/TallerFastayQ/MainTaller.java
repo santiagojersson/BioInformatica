@@ -20,13 +20,15 @@ public class MainTaller {
         System.out.println("-------FASTA ------");
         Reader r = new FileReader("src/TallerFastayQ/archivoFasta.txt");
         LectorFasta lector = new LectorFasta(r);
-        lector.leerFasta();
+        lector.cadenaInversaFasta();
+        
             
         System.out.println("-------FASTA Q------");
         Reader r2 = new FileReader("src/TallerFastayQ/test.fq");
         LectorFastaQ lectorQ = new LectorFastaQ(r2);
-        lectorQ.leerFastaQ();
-        
+        lectorQ.invertirFastaQ();
+       
+       
 
         //leerArchivoFastaQ("F:/archivos/sra_data.fastq"); //modificacion Archivo 1 Gb
         //invertirFastaQ("F:/archivos/sra_data.fastq");//invertir ADN/ARN Archivo 1 Gb

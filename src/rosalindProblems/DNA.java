@@ -1,41 +1,40 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package rosalindProblems;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import rosalindProblems.Reader.DNAReader;
+import rosalindProblems.Reader.RawDNAReader;
 import java.io.InputStream;
 
+/**
+ *
+ * @author JuanFelipe
+ */
+public class DNA extends GenericProblem{
 
-public class DNA {
-    public static int[] s= new int[4];
-    
-    public static void logic() throws FileNotFoundException, IOException {
-        
-        InputStream in = new FileInputStream(new File("src/rosalindProblems/entradas/dna.txt"));
-        RawADNReader r= new RawADNReader(in);
-        
-        
-        
-        int i= r.available();
-        char letra;
-        while (i>=1) {
-            letra=(char)r.read();
-            if(letra=='A'){
-                s[0]=s[0]+1;
-            }else if(letra=='C'){
-                s[1]=s[1]+1;
-            }else if(letra=='G'){
-                s[2]=s[2]+1;
-            } else if(letra=='T'){
-                s[3]=s[3]+1;
-            }    
-            i--;
+    @Override
+    public String Solve(DNAReader Origin) {
+        int A=0,C=0,T=0,G=0;
+        while(Origin.CanRead()){
+            char c =Origin.ReadChar();
+            switch(c){
+                    case 'A': A++;continue;
+                    case 'C':C++;continue;
+                    case 'G':G++;continue;
+                    case 'T':T++;continue;
+            }
         }
-        System.out.println(s[0]+" "+s[1]+" "+s[2]+" "+s[3]);
-        
+        return A+" "+C+" "+G+" "+T;
     }
-    
+
+    @Override
+    public DNAReader getReader(InputStream in) {
+        DNAReader reader = new RawDNAReader();
+        reader.Init(in);
+        return reader;
+    }
     
 }
