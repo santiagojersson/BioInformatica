@@ -5,9 +5,12 @@
  */
 package rosalindProblems;
 
+import java.io.FileReader;
 import rosalindProblems.Reader.DNAReader;
 import rosalindProblems.Reader.RawDNAReader;
 import java.io.InputStream;
+import rosalindProblems.Reader.ADNFastaReader;
+import rosalindProblems.Reader.FastaReader;
 
 /**
  *
@@ -16,10 +19,10 @@ import java.io.InputStream;
 public class DNA extends GenericProblem{
 
     @Override
-    public String Solve(DNAReader Origin) {
+    public String Solve(ADNFastaReader Origin) {
         int A=0,C=0,T=0,G=0;
         while(Origin.CanRead()){
-            char c =Origin.ReadChar();
+            char c =Origin.LeerChar();
             switch(c){
                     case 'A': A++;continue;
                     case 'C':C++;continue;
@@ -31,10 +34,13 @@ public class DNA extends GenericProblem{
     }
 
     @Override
-    public DNAReader getReader(InputStream in) {
-        DNAReader reader = new RawDNAReader();
+    public ADNFastaReader getFastaReader(FileReader in) {
+        ADNFastaReader reader= new FastaReader();
         reader.Init(in);
         return reader;
     }
+
+
+
     
 }

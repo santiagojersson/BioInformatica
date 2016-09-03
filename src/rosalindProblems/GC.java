@@ -12,73 +12,63 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import rosalindProblems.Reader.ADNFastaReader;
+import rosalindProblems.Reader.DNAReader;
+import rosalindProblems.Reader.FastaReader;
+import rosalindProblems.Reader.RawDNAReader;
 
 /**
  *
  * @author Santiago
  */
-public class GC {
-    
-    private String id="";
-    private float content=0; 
-    
-    public void logic() throws FileNotFoundException, IOException {
+public class GC extends GenericProblem {
 
-        InputStream in = new FileInputStream(new File("src/rosalindProblems/entradas/gc.txt"));
-        RawADNReader r= new RawADNReader(in);
-        
-        int i= r.available();
-        float conta=0,size=0;
-        int letra;
-        String nombre="";
-        boolean paso=false;
-        while (i>=1) {
-            letra=r.read();
-            
-            if (letra=='>') {
-                evaluar(nombre,conta,size);
-                conta=0;
-                size=0;
-                nombre="";
-                paso=false;
-                
-            }else if(paso==false && (letra!=10)){
-               nombre=nombre+(char)letra;
-                
-            }else if(paso==false && letra==10){ //salto de linea
-                paso=true;
-                
-            }else if(paso==true &&( letra=='G' || letra=='C' )){
-                conta=conta+1;
-                size=size+1;
-            }else if(letra!=10){
-                size=size+1;
-            }
-            i--;
-            if (i==0) {
-                evaluar(nombre,conta,size);
-            }
-           
-        }
-        System.out.println(this.id+"\n"+this.content);
-        */
-        
-        
-    }
+    public String id = "";
+    public float content = 0;
 
     private void evaluar(String nombre, float conta, float size) {
         float r;
-        
+
         //System.out.println(nombre+" "+conta+" "+size);
-        if (!nombre.equalsIgnoreCase("")&& conta!=0) {
-            r=(conta/size)*100;      
-            if (r>= this.content) {
-                this.content=r;
-                this.id=nombre;
+        if (!nombre.equalsIgnoreCase("") && conta != 0) {
+            r = (conta / size) * 100;
+            if (r >= this.content) {
+                this.content = r;
+                this.id = nombre;
             }
         }
+    }
+
+    @Override
+    public ADNFastaReader getFastaReader(FileReader in) {
+        ADNFastaReader reader = new FastaReader();
+        reader.Init(in);
+        return reader;
+    }
+
+    @Override
+    public String Solve(ADNFastaReader Origin) {
+        List<String> lista = Origin.LeerTodoFasta();
+        
+        float conta = 0, size = 0;
+        int incremento=2;
+        String nombre = "";
+        String cadena = "";
+        for (int i = 0; i < lista.size() - 1; i+=incremento) {
+            nombre = lista.get(i);
+            cadena = lista.get((i + 1));
+            size = cadena.length();
+            for (int j = 0; j < cadena.length(); j++) {
+                if (cadena.charAt(j) == 'G' || cadena.charAt(j) == 'C') {
+                    conta++;
+                }
+            }
+            evaluar(nombre, conta, size);
+        }
+
+        return this.id + "\n" + this.content;
     }
 }

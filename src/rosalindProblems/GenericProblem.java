@@ -5,16 +5,17 @@
  */
 package rosalindProblems;
 
+import java.io.FileReader;
 import rosalindProblems.Reader.DNAReader;
 import java.io.InputStream;
+import rosalindProblems.Reader.ADNFastaReader;
 
 /**
  *
  * @author JuanFelipe
  */
 public abstract class GenericProblem {
-    
-    public abstract DNAReader getReader(InputStream in);
-    public abstract String Solve(DNAReader Origin);
+    public abstract ADNFastaReader getFastaReader(FileReader in);
+    public abstract String Solve(ADNFastaReader Origin);
     
 }

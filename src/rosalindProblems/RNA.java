@@ -8,9 +8,12 @@ package rosalindProblems;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import rosalindProblems.Reader.ADNFastaReader;
 import rosalindProblems.Reader.DNAReader;
+import rosalindProblems.Reader.FastaReader;
 import rosalindProblems.Reader.RawDNAReader;
 
 
@@ -22,19 +25,13 @@ public class RNA extends GenericProblem{
      
     
 
+    
     @Override
-    public DNAReader getReader(InputStream in) {
-        DNAReader reader = new RawDNAReader();
-        reader.Init(in);
-        return reader;
-    }
-
-    @Override
-    public String Solve(DNAReader Origin) {
+    public String Solve(ADNFastaReader Origin) {
         char letra;
         String a="";
         while (Origin.CanRead()) {
-            letra=(char)Origin.ReadChar();
+            letra=(char)Origin.LeerChar();
             if(letra=='T'){
                 a=a+"U";
             }else {
@@ -43,4 +40,12 @@ public class RNA extends GenericProblem{
         }
         return a;
     }
+
+    @Override
+    public ADNFastaReader getFastaReader(FileReader in) {
+        ADNFastaReader reader = new FastaReader();
+        reader.Init(in);
+        return reader;
+    }
+    
 }

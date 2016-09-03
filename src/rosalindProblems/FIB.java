@@ -13,46 +13,44 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.StringTokenizer;
+import rosalindProblems.Reader.ADNFastaReader;
+import rosalindProblems.Reader.FastaReader;
 
 /**
  *
  * @author Santiago
  */
-public class FIB {
-    
-    public static void logic() throws FileNotFoundException, IOException{
-        BufferedReader br = new BufferedReader(new FileReader("src/rosalindProblems/entradas/fib.txt"));
-        
-        int n=0,k=0;
-        String entra;
-        while ((entra=br.readLine())!=null) {
-            StringTokenizer t = new StringTokenizer(entra);
-            while (t.hasMoreTokens()) {                
-                n=Integer.parseInt(t.nextToken());
-                k=Integer.parseInt(t.nextToken());
-            }         
-        }
-        System.out.println(evaluar(n,k));
+public class FIB extends GenericProblem{
+
+    @Override
+    public ADNFastaReader getFastaReader(FileReader in) {
+        ADNFastaReader reader= new FastaReader();
+        reader.Init(in);
+        return reader;
     }
 
-    private static long evaluar(int n, int k) {
-        long f1=0, f2=0;
-        long f=1;
-        
-        for (int j = 0; j < n; j++) {
-            if (f==1 && j==0) {
-                f1=f;
-            }else if((f==1)&& (j==1)){
-                f2=f1;
-                f1=f; 
-            }else{
-                f=f1+(f2*k);
-                f2=f1;
-                f1=f;
-                
-            }
-            //System.out.println("f "+f);
+    @Override
+    public String Solve(ADNFastaReader Origin) {
+        String entrada= Origin.LeerLinea();
+        StringTokenizer st=new StringTokenizer(entrada);
+        int n=0,k=0;
+        long cerdo=0;
+        while(st.hasMoreTokens()){
+            n=Integer.parseInt(st.nextToken());
+            k=Integer.parseInt(st.nextToken());
         }
-        return f1;
+        
+        long fibo1=1;
+        long fibo2=0;
+        for (int i = 0; i < n-1; i++) {
+            
+                cerdo = fibo1+(fibo2*k);
+                fibo2=fibo1;
+                fibo1=cerdo;
+        }
+        
+        return String.valueOf(cerdo);
     }
+    
+    
 }

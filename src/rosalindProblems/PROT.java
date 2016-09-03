@@ -17,7 +17,9 @@ import java.util.Hashtable;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import rosalindProblems.Reader.ADNFastaReader;
 import rosalindProblems.Reader.DNAReader;
+import rosalindProblems.Reader.FastaReader;
 import rosalindProblems.Reader.RawDNAReader;
 
 
@@ -29,15 +31,10 @@ public class PROT extends GenericProblem{
     
     private HashMap<String,String> hm= new HashMap<>();
    
-    @Override
-    public DNAReader getReader(InputStream in) {
-        DNAReader reader = new RawDNAReader();
-        reader.Init(in);
-        return reader;
-    }
+    
 
     @Override
-    public String Solve(DNAReader Origin) {
+    public String Solve(ADNFastaReader Origin) {
         try {
             llenarMap();
         } catch (IOException ex) {
@@ -49,7 +46,7 @@ public class PROT extends GenericProblem{
         String result="";
         boolean paso=false;
         while (Origin.CanRead()) {
-            letra=Origin.ReadChar();
+            letra=Origin.LeerChar();
             if (conta==3) {
                 result=result+this.hm.get(key);
                 key="";
@@ -78,6 +75,12 @@ public class PROT extends GenericProblem{
         }
         bf.close();
     }
-    
+
+    @Override
+    public ADNFastaReader getFastaReader(FileReader in) {
+        ADNFastaReader reader= new FastaReader();
+        reader.Init(in);
+        return reader;
+    }
     
 }

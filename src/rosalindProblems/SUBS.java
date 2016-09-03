@@ -12,21 +12,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
+import rosalindProblems.Reader.ADNFastaReader;
 import rosalindProblems.Reader.DNAReader;
+import rosalindProblems.Reader.FastaReader;
 import rosalindProblems.Reader.RawDNAReader;
 
 public class SUBS extends GenericProblem{
     
 
-    @Override
-    public DNAReader getReader(InputStream in) {
-        DNAReader reader = new RawDNAReader();
-        reader.Init(in);
-        return reader;
-    }
+    
 
     @Override
-    public String Solve(DNAReader Origin) {
+    public String Solve(ADNFastaReader Origin) {
         List<String> ls=Origin.ReadAllLines();
         String s=ls.get(0);
         String t=ls.get(1);
@@ -47,4 +44,13 @@ public class SUBS extends GenericProblem{
         }
         return (result);
     }
+
+    @Override
+    public ADNFastaReader getFastaReader(FileReader in) {
+        ADNFastaReader reader= new FastaReader();
+        reader.Init(in);
+        return reader;
+    }
+    
+    
 }

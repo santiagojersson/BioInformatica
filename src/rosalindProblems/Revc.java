@@ -12,7 +12,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import rosalindProblems.Reader.ADNFastaReader;
 import rosalindProblems.Reader.DNAReader;
+import rosalindProblems.Reader.FastaReader;
 import rosalindProblems.Reader.RawDNAReader;
 
 /**
@@ -21,19 +23,14 @@ import rosalindProblems.Reader.RawDNAReader;
  */
 public class Revc extends GenericProblem{
     
-    @Override
-    public DNAReader getReader(InputStream in) {
-        DNAReader reader = new RawDNAReader();
-        reader.Init(in);
-        return reader;
-    }
+    
 
     @Override
-    public String Solve(DNAReader Origin) {
+    public String Solve(ADNFastaReader Origin) {
         String linea;
         char[] re = null;
          while (Origin.CanRead()) {
-             linea=Origin.ReadLine();
+             linea=Origin.LeerLinea();
              re=invert(linea.toCharArray());
             
          }
@@ -64,6 +61,13 @@ public class Revc extends GenericProblem{
         }
         return r;
     
+    }
+
+   @Override
+    public ADNFastaReader getFastaReader(FileReader in) {
+        ADNFastaReader reader = new FastaReader();
+        reader.Init(in);
+        return reader;
     }
 
     

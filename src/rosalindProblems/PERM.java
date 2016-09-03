@@ -5,26 +5,23 @@
  */
 package rosalindProblems;
 
+import java.io.FileReader;
 import java.io.IOException;
+import rosalindProblems.Reader.ADNFastaReader;
+import rosalindProblems.Reader.FastaReader;
 
 /**
  *
  * @author Santiago
  */
-public class PERM {
+public class PERM extends GenericProblem{
     
-    public static void logic(int entrada) throws IOException{
-        
-        System.out.println(factorial(entrada));
-        int n=entrada;
-        int r=entrada;
-        String elem=conjunto1(1,entrada,"");
-        permutacion(elem,"",n,r);
-    }
+    private String ret="";
+   
     
-    private static void permutacion(String elementos,String actual, int n, int r){
+    private void permutacion(String elementos,String actual, int n, int r){
         if (n==0) {
-            System.out.println(actual);
+            this.ret=this.ret+"\n"+actual;
         }else{
             for (int i = 0; i < r; i++) {
                 if (!actual.contains(elementos.charAt(i)+"")) {
@@ -34,7 +31,7 @@ public class PERM {
         }
     }
     
-    private static int factorial(int numero){
+    private int factorial(int numero){
         if (numero==0) {
             return 1;
         }else{
@@ -42,7 +39,7 @@ public class PERM {
         }
     }
 
-    private static String conjunto(int entrada) {
+    private String conjunto(int entrada) {
         String r="";
         for (int i = 1; i <= entrada; i++) {
             r=r+i+"";
@@ -50,7 +47,7 @@ public class PERM {
         return r;
     }
     
-    private static String conjunto1(int inicio,int fin,String conj) {
+    private String conjunto1(int inicio,int fin,String conj) {
         if (inicio == fin) {
             return "1"+conj;
         }else{
@@ -59,5 +56,23 @@ public class PERM {
             return conjunto1(inicio,fin,conj);
         }
         
+    }
+
+    @Override
+    public ADNFastaReader getFastaReader(FileReader in) {
+        ADNFastaReader reader= new FastaReader();
+        reader.Init(in);
+        return reader;
+    }
+
+    @Override
+    public String Solve(ADNFastaReader Origin) {
+        int entrada= Integer.parseInt(Origin.LeerLinea());
+        ret=factorial(entrada)+"";
+        int n=entrada;
+        int r=entrada;
+        String elem=conjunto1(1,entrada,"");
+        permutacion(elem,"",n,r);
+        return this.ret;
     }
 }
