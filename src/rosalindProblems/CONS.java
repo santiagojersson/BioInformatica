@@ -14,99 +14,82 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import rosalindProblems.Reader.ADNFastaReader;
+import rosalindProblems.Reader.FastaReader;
 
 /**
  *
  * @author Santiago
  */
-public class CONS {
+public class CONS extends GenericProblem{
 
-    private static int[] a;
-    private static int[] c;
-    private static int[] g;
-    private static int[] t;
-    private static ArrayList<String> entradas = new ArrayList<>();
-
-    public static void logic() throws FileNotFoundException, IOException {
-
-        BufferedReader br = new BufferedReader(new FileReader("src/rosalindProblems/entradas/cons.txt"));
-        
-        
-        String linea = "";
-        String l="";
-        while ((linea = br.readLine()) != null) {
-            if (linea.contains(">")) {
-                if (!l.equalsIgnoreCase("")) {
-                    entradas.add(l);
-                    l="";
-                }
-            } else {
-                l=l+linea;
-            }
-        }
-        entradas.add(l);
-        
-        
-       
-        constructor(entradas.get(0).length());
-        llenarArreglos();
-        evaluarArreglos();
-        imprimirArreglos();
-        
+    
+    @Override
+    public ADNFastaReader getFastaReader(FileReader in) {
+        ADNFastaReader reader= new FastaReader();
+        reader.Init(in);
+        return reader;
     }
 
-    private static void constructor(int length) {
-        a=new int[length];
-        c=new int[length];
-        g=new int[length];
-        t=new int[length];
-    }
-
-    private static void llenarArreglos() {
-        for (String entrada : entradas) {
-            for (int i = 0; i < entrada.length(); i++) {
-                if (entrada.charAt(i)=='A') {
-                    a[i]=a[i]+1;
-                }else if (entrada.charAt(i)=='C') {
-                    c[i]=c[i]+1;
-                }else if (entrada.charAt(i)=='G') {
-                    g[i]=g[i]+1;
-                }else if (entrada.charAt(i)=='T') {
-                    t[i]=t[i]+1;
+    @Override
+    public String Solve(ADNFastaReader Origin) {
+        List<String> lista= Origin.LeerCadenasFasta();
+        
+        String aa="A:",cc="C:",gg="G:",tt="T:";
+        String cadena="";
+        int a=0, c=0, g=0, t=0;
+        int j=lista.get(0).length();
+        for (int i = 0; i < j; i++) {
+            for (int k = 0; k < lista.size(); k++) {
+                char ch=lista.get(k).charAt(i);
+                if (ch=='A') {
+                    a++;
+                } else if(ch=='C'){
+                    c++;
+                }else if(ch=='G'){
+                    g++;
+                }else if(ch=='T'){
+                    t++;
                 }
             }
+            aa=aa+" "+a;
+            cc=cc+" "+c;
+            gg=gg+" "+g;
+            tt=tt+" "+t;
+            cadena=cadena+evaluar(a,c,g,t);
+            a=0;c=0;g=0;t=0;
         }
+        
+        
+        return cadena+"\n"+aa+"\n"+cc+"\n"+gg+"\n"+tt;
     }
+    
+  
 
-    private static void evaluarArreglos() {
-        String result="";
-        int mayor=0;
-        for (int i = 0; i < a.length; i++) {
-            int aa=a[i], cc=c[i], gg=g[i], tt=t[i];
+
+    private char evaluar(int a,int c, int g, int t) {
+        char ret=0;
+        
+        
+            int aa=a, cc=c, gg=g, tt=t;
             if ((aa>=cc)&&(aa>=gg)&&(aa>=tt)) {
-                result=result+"A";
+                ret='A';
             } else if((cc>=aa)&&(cc>=gg)&&(cc>=tt)){
-                result=result+"C";
+                ret='C';
             }else if((gg>=aa)&&(gg>=cc)&&(gg>=tt)){
-                result=result+"G";
+                ret='G';
             }else if((tt>=aa)&&(tt>=cc)&&(tt>=gg)){
-                result=result+"T";
+                ret='T';
             }
             
-        }
-        System.out.println(result);
+        
+        return ret;
         
     }
 
-    private static void imprimirArreglos() {
-       String aa="A:",cc="C:",gg="G:",tt="T:";
-        for (int i : a) {
-            aa=aa+" "+i;
-            cc=cc+" "+i;
-            gg=gg+" "+i;
-            tt=tt+" "+i;
-        }
-        System.out.println(aa+"\n"+cc+"\n"+gg+"\n"+tt);
-    }
+   
+
+   
 
 }

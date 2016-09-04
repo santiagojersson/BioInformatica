@@ -47,10 +47,15 @@ public class Main {
             reader = new FileReader("src/rosalindProblems/entradas/prtm.txt");break;
             case 9: problemita = new PERM();
             reader = new FileReader("src/rosalindProblems/entradas/perm.txt");break;
+            case 10: problemita = new REVP();
+            reader = new FileReader("src/rosalindProblems/entradas/revp.txt");break;
+            case 11: problemita = new CONS();
+            reader = new FileReader("src/rosalindProblems/entradas/cons.txt");break;
         }
         
         String result= problemita.Solve(problemita.getFastaReader(reader));
         Writer.consoleWriter(result);
+        //Writer.writeToClipboard(result);
         
     }
     
