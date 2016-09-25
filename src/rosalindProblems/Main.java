@@ -23,7 +23,7 @@ public class Main {
    
         public static void main(String[] args) throws FileNotFoundException {
         GenericProblem problemita = null;
-        int i =9;
+        int i =12;
         
         FileReader reader=null;
         switch(i){
@@ -51,6 +51,8 @@ public class Main {
             reader = new FileReader("src/rosalindProblems/entradas/revp.txt");break;
             case 11: problemita = new CONS();
             reader = new FileReader("src/rosalindProblems/entradas/cons.txt");break;
+            case 12: problemita = new Comparador();
+            reader = new FileReader("src/rosalindProblems/entradas/comparador.txt");break;
         }
         
         String result= problemita.Solve(problemita.getFastaReader(reader));
