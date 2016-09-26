@@ -8,6 +8,7 @@ package rosalindProblems;
 import java.io.FileReader;
 import java.util.HashMap;
 import java.util.List;
+import javax.rmi.CORBA.Util;
 import rosalindProblems.Reader.ADNFastaReader;
 import rosalindProblems.Reader.FastaReader;
 
@@ -18,6 +19,8 @@ import rosalindProblems.Reader.FastaReader;
 public class Comparador extends GenericProblem{
 
     private HashMap<String, Integer> mapaPares;
+    private boolean isLocal;
+    private int delta = -5;
     
     @Override
     public ADNFastaReader getFastaReader(FileReader in) {
@@ -31,17 +34,15 @@ public class Comparador extends GenericProblem{
         List<String> lista= Origin.ReadAllLines();
         String cadena2=lista.get(0);
         String cadena1=lista.get(1);
-        int delta = -5;
+        isLocal= Boolean.valueOf(lista.get(2));
+        
         CargarTabla();
         
         int[][] algo = new int[cadena1.length() + 1][cadena2.length() + 1];
         algo[0][0] = 0;
-
-        for (int i = 1; i < algo.length; i++) {
-            algo[0][i] = algo[0][i - 1] + delta;
-            algo[i][0] = algo[i - 1][0] + delta;
-        }
-
+        
+        algo=llenarArreglo(algo.length);
+        
         for (int i = 1; i < algo.length; i++) {
             for (int j = 1; j < algo.length; j++) {
                 int a = 0;
@@ -55,9 +56,12 @@ public class Comparador extends GenericProblem{
             }
         }
         
-        //imprimirTabla(algo);
-        String[] aa=alinear(algo, cadena2, cadena1);
-        return(aa[0]+"\n"+aa[1]);
+        alinearLocal(algo, cadena1, cadena2);
+        
+        imprimirTabla(algo);
+        //String[] aa=alinear(algo, cadena2, cadena1);
+        //return(aa[0]+"\n"+aa[1]);
+        return "";
         
     }
     
@@ -82,18 +86,31 @@ public class Comparador extends GenericProblem{
         mapaPares.put("TT", 2);
     }
     
-     public static int CalcularMax(int hori, int verti, int diago) {
-        if ((hori >= verti) && (hori >= diago)) {
-            return hori;
-        } else if (verti >= diago) {
-            return verti;
-        } else {
-            return diago;
-        }
+     public int CalcularMax(int hori, int verti, int diago) {
+         if (!isLocal) {
+             if ((hori >= verti) && (hori >= diago)) {
+                 return hori;
+             } else if (verti >= diago) {
+                 return verti;
+             } else {
+                 return diago;
+             }
+         }else{
+             if ((hori >= verti) && (hori >= diago) && (hori>=0)) {
+                 return hori;
+             } else if (verti >= diago && (verti >= 0)) {
+                 return verti;
+             } else if(diago>=0){
+                 return diago;
+             }else {
+                 return 0;
+             }
+         }
+        
     }
      
      
-      public static void imprimirTabla(int[][] matriz) {
+      public  void imprimirTabla(int[][] matriz) {
         for (int x = 0; x < matriz.length; x++) {
             System.out.print("|");
             for (int y = 0; y < matriz[x].length; y++) {
@@ -107,7 +124,7 @@ public class Comparador extends GenericProblem{
     }
     
       
-     public static String[]alinear(int[][] matriz, String cadena1, String cadena2){
+     public String[]alinear(int[][] matriz, String cadena1, String cadena2){
         int i = matriz.length-1;
         int j = matriz.length-1;
         String[] cadenas = {"",""};
@@ -139,6 +156,39 @@ public class Comparador extends GenericProblem{
         cadenas[0]=new StringBuilder(cadenas[0]).reverse().toString();
         cadenas[1]=new StringBuilder(cadenas[1]).reverse().toString();
         return cadenas;
+    }
+
+    private int[][] llenarArreglo(int tamano) {
+        int[][] algo = new int[tamano][tamano];
+        if (!isLocal) {
+           for (int i = 1; i < tamano; i++) {
+            algo[0][i] = algo[0][i - 1] + delta;
+            algo[i][0] = algo[i - 1][0] + delta;
+           }
+        }else{
+          for (int i = 1; i < tamano; i++) {
+            algo[0][i] = 0;
+            algo[i][0] = 0;
+           }      
+        }
+        return algo;
+    }
+
+    private void alinearLocal(int[][] matriz, String cadena1, String cadena2) {
+        for (int i = 0; i < matriz.length-1; i++) {
+            for (int j = 0; j < matriz.length-1; j++) {
+                int dato=matriz[i][j];
+                int diagonal=0;
+                if ((i+1)>matriz.length && (j+1)>matriz.length) {
+                    break;
+                }else{
+                    diagonal=matriz[i+1][j+1];
+                }
+                
+            }
+ 
+        }
+        
     }
       
       
