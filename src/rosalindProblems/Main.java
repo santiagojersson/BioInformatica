@@ -5,13 +5,8 @@
  */
 package rosalindProblems;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import rosalindProblems.Writer.Writer;
 
 /**
@@ -53,6 +48,8 @@ public class Main {
             reader = new FileReader("src/rosalindProblems/entradas/cons.txt");break;
             case 12: problemita = new Comparador();
             reader = new FileReader("src/rosalindProblems/entradas/comparador.txt");break;
+            case 13: problemita = new SubStringK();
+            reader = new FileReader("src/rosalindProblems/entradas/substringk.txt");break;
         }
         
         String result= problemita.Solve(problemita.getFastaReader(reader));
